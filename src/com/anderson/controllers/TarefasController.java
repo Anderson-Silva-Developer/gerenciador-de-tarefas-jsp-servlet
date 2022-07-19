@@ -9,10 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.anderson.model.Tarefa;
+
+import service.TarefaService;
+
 
 @WebServlet("/")
 public class TarefasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private TarefaService tarefaService = new TarefaService();
    
     public TarefasController() {
         super();
@@ -23,6 +29,7 @@ public class TarefasController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/index.jsp");
+		request.setAttribute("tarefas",tarefaService.findAll());
 		dispatcher.forward(request, response);
 	}
 
@@ -30,9 +37,12 @@ public class TarefasController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String title=request.getParameter("title");
-		String obTarefa=request.getParameter("obTarefa");
-		System.out.println(title);
-		System.out.println(obTarefa);
+		String obTarefa=request.getParameter("obTarefa");			
+		tarefaService.create(new Tarefa(title,obTarefa));	
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/index.jsp");
+		request.setAttribute("tarefas",tarefaService.findAll());
+		dispatcher.forward(request, response);
+		
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,12 +24,17 @@
 		
 	</thead>
 	<tbody>
+	<c:forEach items="${tarefas}" var="t">
+		
 		<tr>
-			<td>Estudar Java</td>
+			<td><c:out value="${t.title}"/></td>
 			<td>10/07/2022</td>
 			<td>20/07/2022</td>
-			<td>tarefa criada para estudo java</td>
-		</tr>	
+			<td><c:out  value="${t.obTarefa}"/></td>
+		</tr>		
+	
+	</c:forEach>
+		
 			
 		
 	</tbody>
