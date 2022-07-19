@@ -42,14 +42,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        	<form>
+        	<form action="/tarefas/" method="post">
 				 <div class="mb-3">
 				    <label for="title" class="form-label">Titulo da tarefa</label>
-				    <input class="form-control" id="title">				  
+				    <input class="form-control" id="title" name="title">				  
 				  </div>
 				  <div class="mb-3">
 				    <label for="obTarefa" class="form-label">Observação da Tarefa</label>
-				    <input type="password" class="form-control" id="obTarefa">
+				    <input class="form-control" id="obTarefa" name="obTarefa">
 				  </div>
 				  <button type="submit" class="btn btn-success ">Adicionar</button>
 			</form>

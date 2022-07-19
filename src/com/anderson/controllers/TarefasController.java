@@ -29,7 +29,10 @@ public class TarefasController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		String title=request.getParameter("title");
+		String obTarefa=request.getParameter("obTarefa");
+		System.out.println(title);
+		System.out.println(obTarefa);
 	}
 
 }
