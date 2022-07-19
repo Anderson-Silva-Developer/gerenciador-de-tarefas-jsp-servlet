@@ -1,5 +1,9 @@
 package com.anderson.model;
 
+import java.time.LocalDate;
+
+import sun.util.resources.LocaleData;
+
 /**
  * @author asc
  *
@@ -10,6 +14,8 @@ public class Tarefa {
 	private String title;
 	private String obTarefa;
 	private boolean done=false;
+	private LocalDate dataCriacao;
+	private LocalDate dataConclusao;
 	
 	
 	
@@ -37,9 +43,25 @@ public class Tarefa {
 	public void setDone(boolean done) {
 		this.done = done;
 	}
+	
+	
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	public LocalDate getDataConclusao() {
+		return dataConclusao;
+	}
+	public void setDataConclusao(LocalDate dataConclusao) {
+		this.dataConclusao = dataConclusao;
+	}
 	public Tarefa(String title, String obTarefa) {		
 		this.title = title;
 		this.obTarefa = obTarefa;
+		this.dataCriacao=LocalDate.now();
+		this.dataConclusao=null;
 				
 	}
 	

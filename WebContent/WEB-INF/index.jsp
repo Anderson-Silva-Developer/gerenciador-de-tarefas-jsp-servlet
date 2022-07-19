@@ -28,8 +28,8 @@
 		
 		<tr>
 			<td><c:out value="${t.title}"/></td>
-			<td>10/07/2022</td>
-			<td>20/07/2022</td>
+			<td><c:out value="${t.dataCriacao}"/></td>
+			<td><c:out value="${t.dataConclusao}"/></td>
 			<td><c:out  value="${t.obTarefa}"/></td>
 		</tr>		
 	
