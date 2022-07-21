@@ -13,6 +13,9 @@ public class TarefaService {
 	public void create(Tarefa  tarefa) {
 		repository.create(tarefa);		
 	}
+	public void update(Tarefa  tarefa) {		
+		repository.update(tarefa);		
+	}
 	
 	public List<Tarefa> findAll() {		
 			return repository.findAll();		

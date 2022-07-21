@@ -2,8 +2,6 @@ package com.anderson.model;
 
 import java.time.LocalDate;
 
-import sun.util.resources.LocaleData;
-
 /**
  * @author asc
  *
@@ -64,8 +62,7 @@ public class Tarefa {
 		this.dataConclusao=null;
 				
 	}
-	
-	
+		
 	
 	
 }

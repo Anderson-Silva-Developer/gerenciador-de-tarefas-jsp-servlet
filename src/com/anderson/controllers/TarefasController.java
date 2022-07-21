@@ -26,23 +26,42 @@ public class TarefasController extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	
 		
 		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/index.jsp");
-		request.setAttribute("tarefas",tarefaService.findAll());
+		request.setAttribute("tarefas",tarefaService.findAll());		
 		dispatcher.forward(request, response);
+		
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+		String action=req.getParameter("action");
 		
-		String title=request.getParameter("title");
-		String obTarefa=request.getParameter("obTarefa");			
-		tarefaService.create(new Tarefa(title,obTarefa));	
-		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/index.jsp");
-		request.setAttribute("tarefas",tarefaService.findAll());
-		dispatcher.forward(request, response);
+		String title=req.getParameter("title").trim().length()>0?req.getParameter("title"):"sem titulo";
+		String obTarefa=req.getParameter("obTarefa").trim().length()>0?req.getParameter("obTarefa"):"sem observações";
+		String idTarefa=req.getParameter("id");		
+		switch (action) {
+		case "createTarefa":						
+			tarefaService.create(new Tarefa(title,obTarefa));				
+			break;
+		case "updateTarefa":				
+			
+			Tarefa tarefa=new Tarefa(title,obTarefa);
+			tarefa.setId(Long.parseLong(idTarefa));
+			tarefaService.update(tarefa);				
+			
+			break;
+
+		default:
+			break;
+		}
+		RequestDispatcher dispatcher= req.getRequestDispatcher("/WEB-INF/index.jsp");
+		req.setAttribute("tarefas",tarefaService.findAll());
+		dispatcher.forward(req , response);				
+
 		
 	}
-
+	
 }

@@ -2,12 +2,14 @@ package repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.anderson.model.Tarefa;
 
 public class TarefaRepository {
 	private static Long  AUTO_INCREMENT=0L;
-	private static ArrayList<Tarefa> tarefas=new ArrayList<Tarefa>();
+	private static List<Tarefa> tarefas=new ArrayList<Tarefa>();
 	
 	public void create(Tarefa tarefa) {
 		AUTO_INCREMENT++;
@@ -18,10 +20,14 @@ public class TarefaRepository {
 		
 		return tarefas;		
 	}
-	
-	
-	
-	
+	public void update(Tarefa tarefa) {		
+		
+		 tarefas=tarefas.stream()
+		.filter(t->t.getId()==tarefa.getId())			
+		.map(filtered->filtered=tarefa)
+		.collect(Collectors.toList());
+						
+	}	
 	
 
 }
