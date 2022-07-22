@@ -35,6 +35,9 @@
 			<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
 			onclick="onUpdate('${t.id}','${t.title}','${t.obTarefa}')"
 			>Editar</button>
+			<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+			onclick="onDelete('${t.id}','${t.title}','${t.obTarefa}')"
+			>Deletar</button>
 			</td>
 		</tr>		
 	
@@ -90,7 +93,35 @@
 				  </div>
 				  <input type="hidden" name="id" value="">
 				  <input type="hidden" name="action" value="updateTarefa">
-				  <button type="submit" class="btn btn-success ">Atualizar</button>
+				  <button type="submit" class="btn btn-secondary">Atualizar</button>
+			</form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal delete-->
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Certeza que deseja remover a tarefa?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        	<form action="/tarefas/" method="post">
+				 <div class="mb-3">
+				    <label for="title" class="form-label">Titulo da tarefa</label>
+				    <input class="form-control" id="title" name="title" required readonly="readonly">				  
+				  </div>
+				  <div class="mb-3">
+				    <label for="obTarefa" class="form-label">Observação da Tarefa</label>
+				    <input class="form-control" id="obTarefa" name="obTarefa" required readonly="readonly">
+				  </div>
+				  <input type="hidden" name="id" value="">
+				  <input type="hidden" name="action" value="deleteTarefa">
+				  <button type="submit" class="btn btn-danger ">Deletar</button>
+				  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
 			</form>
       </div>
       
@@ -104,6 +135,15 @@ function onUpdate(id,title,obTarefa){
 	var titleEl=document.querySelector("#updateModal input[name=title]");
 	var idEl=document.querySelector("#updateModal input[name=id]");
 	var obTarefaEl=document.querySelector("#updateModal input[name=obTarefa]");
+	titleEl.value=title;
+	idEl.value=id;
+	obTarefaEl.value=obTarefa;
+}
+function onDelete(id,title,obTarefa){
+	
+	var titleEl=document.querySelector("#deleteModal input[name=title]");
+	var idEl=document.querySelector("#deleteModal input[name=id]");
+	var obTarefaEl=document.querySelector("#deleteModal input[name=obTarefa]");
 	titleEl.value=title;
 	idEl.value=id;
 	obTarefaEl.value=obTarefa;

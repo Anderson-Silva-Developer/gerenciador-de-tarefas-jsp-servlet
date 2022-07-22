@@ -16,9 +16,13 @@ public class TarefaService {
 	public void update(Tarefa  tarefa) {		
 		repository.update(tarefa);		
 	}
+	public void delete(Long id) {
+		repository.delete(id);		
+	}
 	
 	public List<Tarefa> findAll() {		
 			return repository.findAll();		
 		}
+	
 	
 	}

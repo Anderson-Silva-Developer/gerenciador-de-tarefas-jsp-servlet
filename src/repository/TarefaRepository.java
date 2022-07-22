@@ -27,6 +27,12 @@ public class TarefaRepository {
 		.map(filtered->filtered=tarefa)
 		.collect(Collectors.toList());
 						
+	}
+	public void delete(Long id) {
+		tarefas.removeIf(t->t.getId()==id);		
+		
+		// TODO Auto-generated method stub
+		
 	}	
 	
 

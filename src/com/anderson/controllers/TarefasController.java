@@ -46,12 +46,14 @@ public class TarefasController extends HttpServlet {
 		case "createTarefa":						
 			tarefaService.create(new Tarefa(title,obTarefa));				
 			break;
-		case "updateTarefa":				
-			
+		case "updateTarefa":			
 			Tarefa tarefa=new Tarefa(title,obTarefa);
 			tarefa.setId(Long.parseLong(idTarefa));
 			tarefaService.update(tarefa);				
 			
+			break;
+		case "deleteTarefa":
+			tarefaService.delete(Long.parseLong(idTarefa));
 			break;
 
 		default:
