@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.anderson.model.Tarefa;
 
 import service.TarefaService;
+import validationData.ValidationTarefa;
 
 
 @WebServlet("/")
@@ -19,6 +20,7 @@ public class TarefasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private TarefaService tarefaService = new TarefaService();
+	private ValidationTarefa validationTarefa=new  ValidationTarefa();
    
     public TarefasController() {
         super();
@@ -37,13 +39,15 @@ public class TarefasController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-		String action=req.getParameter("action");
 		
-		String title=req.getParameter("title").trim().length()>0?req.getParameter("title"):"sem titulo";
-		String obTarefa=req.getParameter("obTarefa").trim().length()>0?req.getParameter("obTarefa"):"sem observações";
+		String action=req.getParameter("action");			
+		
+		String title=validationTarefa.validationTitle(req.getParameter("title"));
+		String obTarefa=validationTarefa.validationObTarefa(req.getParameter("obTarefa"));
 		String idTarefa=req.getParameter("id");		
+		
 		switch (action) {
-		case "createTarefa":						
+		case "createTarefa":				
 			tarefaService.create(new Tarefa(title,obTarefa));				
 			break;
 		case "updateTarefa":			
@@ -55,6 +59,13 @@ public class TarefasController extends HttpServlet {
 		case "deleteTarefa":
 			tarefaService.delete(Long.parseLong(idTarefa));
 			break;
+			
+		case "done":
+			tarefaService.markAsDone(Long.parseLong(idTarefa));
+			break;
+		case "notDone":
+			tarefaService.markAsNotDone(Long.parseLong(idTarefa));
+			break;		
 
 		default:
 			break;

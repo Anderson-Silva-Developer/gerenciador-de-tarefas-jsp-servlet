@@ -8,11 +8,12 @@
 <title>Gerenciador de Tarefas</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style type="text/css">.done{text-decoration: line-through;color:blue;}</style>
 </head>
 <body class="container mt-5">
 <h1>Gerenciador de Tarefas</h1>
 <button class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#createModal">+ Adicionar Tarefa</button>
-<table class="table">
+<table class="table row-fluid">
 	<thead>
 		<tr>
 			<th>Tarefa</th>	  
@@ -26,19 +27,34 @@
 	<tbody>
 	<c:forEach items="${tarefas}" var="t">
 		
-		<tr>
-			<td><c:out value="${t.title}"/></td>
+		<tr class="${t.done==true?'table-secondary':''}">
+		    
+			<td class="${t.done==true?'done':''}"><c:out value="${t.title}"/></td>
 			<td><c:out value="${t.dataCriacao}"/></td>
 			<td><c:out value="${t.dataConclusao}"/></td>
 			<td><c:out  value="${t.obTarefa}"/></td>
-			<td>
-			<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
-			onclick="onUpdate('${t.id}','${t.title}','${t.obTarefa}')"
-			>Editar</button>
-			<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-			onclick="onDelete('${t.id}','${t.title}','${t.obTarefa}')"
-			>Deletar</button>
+			
+			<td>	
+			<div class="d-flex  justify-content-around">			   	
+						
+				<form method="post">
+				    <input type="hidden" name="id" value="${t.id}">
+				    <input type="hidden" name="action" value="${t.done==false?'done':'notDone'}">
+					<button type="submit" class="${t.done==false?'btn btn-primary':'btn btn-secondary'}" >${t.done==true?"Desfazer":"Concluir"}</button>
+				</form>				
+				
+				<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"				
+				onclick="onUpdate('${t.id}','${t.title}','${t.obTarefa}')" style="${t.done==true?'display:none':''}"
+				>Editar</button>
+				<button class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal"
+				onclick="onDelete('${t.id}','${t.title}','${t.obTarefa}')"
+				>Deletar</button>
+				</div>
+						
+			
 			</td>
+			
+			
 		</tr>		
 	
 	</c:forEach>
